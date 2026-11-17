@@ -132,7 +132,7 @@ export class Enemy {
     this.cooldown -= dt;
     this.aiming = seesPlayer && distance < 48;
     if (this.aiming && this.cooldown <= 0) {
-      this.cooldown = (this.isBoss ? 0.72 : this.kind === 'cop' ? 1.25 : 1.55) + Math.random() * 0.5;
+      this.cooldown = (this.isBoss ? 0.68 : this.kind === 'cop' ? 1.25 : 1.55) + Math.random() * 0.5;
       this.game.combat.enemyShoot(this);
     }
 

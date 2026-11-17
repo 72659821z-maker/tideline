@@ -106,7 +106,7 @@ export class WantedSystem {
       this.spawnClock -= dt;
       if (this.spawnClock <= 0) {
         this.spawnUnit();
-        this.spawnClock = 4.5;
+        this.spawnClock = 4.0;
       }
     } else {
       this.spawnClock = Math.max(0, this.spawnClock);

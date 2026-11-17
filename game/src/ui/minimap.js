@@ -6,7 +6,7 @@ import { ROAD_X, ROAD_Z, ROAD_HALF, WATER_Z, BEACH_Z, PARK, BLOCK_CENTRES_X, BLO
 export class Minimap {
   constructor() {
     this.scale = 0.58;
-    this.worldRadius = 155;
+    this.worldRadius = 165;
   }
 
   draw(ctx, game, cx, cy, radius) {

@@ -8,6 +8,8 @@ const params = new URLSearchParams(window.location.search);
 const seedParam = Number.parseInt(params.get('seed') ?? '', 10);
 const seed = Number.isInteger(seedParam) ? seedParam : 20261117;
 const shot = params.get('shot');
+// Expose the staged scene name so tooling and the console can see which capture is live.
+if (shot) document.body.dataset.shot = shot;
 
 const canvas = document.getElementById('game');
 const hudCanvas = document.getElementById('hud');

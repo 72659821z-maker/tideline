@@ -6,16 +6,18 @@ import { waterTexture } from './textures.js';
 const SUN_DIRECTION = new THREE.Vector3(0.48, 0.58, 0.58).normalize();
 
 export function createSky(scene, renderer) {
-  scene.background = new THREE.Color('#a9d4df');
-  scene.fog = new THREE.Fog(0xc7e1df, 155, 720);
+  renderer.toneMappingExposure = 1.12;
+  scene.background = new THREE.Color('#bcdde2');
+  // A warm, slightly denser haze sells the golden hour and layers the skyline.
+  scene.fog = new THREE.Fog(0xf1d3b4, 130, 660);
 
   const skyMaterial = new THREE.ShaderMaterial({
     side: THREE.BackSide,
     depthWrite: false,
     uniforms: {
-      topColor: { value: new THREE.Color('#3e91ba') },
-      midColor: { value: new THREE.Color('#9ed3dd') },
-      horizonColor: { value: new THREE.Color('#f6dfc1') },
+      topColor: { value: new THREE.Color('#2b6f9c') },
+      midColor: { value: new THREE.Color('#93c6d2') },
+      horizonColor: { value: new THREE.Color('#ffd9a6') },
       sunDirection: { value: SUN_DIRECTION.clone() },
     },
     vertexShader: `
@@ -38,8 +40,10 @@ export function createSky(scene, renderer) {
         vec3 col = mix(horizonColor, midColor, smoothstep(0.0, 0.24, h));
         col = mix(col, topColor, smoothstep(0.18, 0.82, h));
         float sunAmount = max(dot(dir, sunDirection), 0.0);
-        col += vec3(1.0, 0.72, 0.35) * pow(sunAmount, 220.0) * 2.3;
-        col += vec3(1.0, 0.65, 0.3) * pow(sunAmount, 12.0) * 0.12;
+        col += vec3(1.0, 0.80, 0.46) * pow(sunAmount, 220.0) * 2.9;
+        col += vec3(1.0, 0.62, 0.28) * pow(sunAmount, 11.0) * 0.2;
+        // A low band of warm light pooling on the horizon at golden hour.
+        col += vec3(0.55, 0.24, 0.06) * pow(1.0 - h, 7.0) * 0.5;
         float bands = sin((h + dir.x * 0.12) * 190.0) * 0.006;
         col += vec3(bands);
         gl_FragColor = vec4(col, 1.0);
@@ -50,12 +54,12 @@ export function createSky(scene, renderer) {
   sky.frustumCulled = false;
   scene.add(sky);
 
-  const hemi = new THREE.HemisphereLight(0xd9f3ff, 0x786044, 1.08);
+  const hemi = new THREE.HemisphereLight(0xffe4c6, 0x6b5238, 0.95);
   scene.add(hemi);
-  const ambient = new THREE.AmbientLight(0xfff0d7, 0.14);
+  const ambient = new THREE.AmbientLight(0xffd9a8, 0.12);
   scene.add(ambient);
 
-  const sun = new THREE.DirectionalLight(0xffe2b2, 3.55);
+  const sun = new THREE.DirectionalLight(0xffd39a, 3.95);
   sun.position.copy(SUN_DIRECTION).multiplyScalar(220);
   sun.castShadow = true;
   sun.shadow.mapSize.set(1024, 1024);
@@ -72,9 +76,9 @@ export function createSky(scene, renderer) {
 
   const oceanMaterial = new THREE.MeshPhongMaterial({
     map: waterTexture(),
-    color: 0x2b9fb0,
-    specular: 0xbfeee8,
-    shininess: 95,
+    color: 0x1f8097,
+    specular: 0xffe6bd,
+    shininess: 120,
     transparent: true,
     opacity: 0.97,
   });
@@ -154,4 +158,10 @@ export function updateSunForPlayer(skySystem, x, z) {
 /** Moves the slow cloud bank so the sky has a little life in long shots. */
 export function driftClouds(skySystem, elapsed) {
   skySystem.sky.rotation.y = elapsed * 0.00035;
+  // Slide the painted water texture so the sea shimmers instead of sitting still.
+  const water = skySystem.ocean?.material?.map;
+  if (water) {
+    water.offset.x = (elapsed * 0.0055) % 1;
+    water.offset.y = Math.sin(elapsed * 0.35) * 0.012;
+  }
 }

@@ -12,6 +12,7 @@ export class Input {
     this.mouseDY = 0;
     this.locked = false;
     this.lastMouseMove = 0;
+    this.lastKey = null;
     this.enabled = true;
 
     window.addEventListener('keydown', (event) => this.onKeyDown(event));
@@ -32,6 +33,7 @@ export class Input {
     if (['Space', 'Tab', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.code)) event.preventDefault();
     if (!this.keys.has(event.code)) this.pressed.add(event.code);
     this.keys.add(event.code);
+    this.lastKey = event.code;
     this.onAnyKey?.(event);
   }
 

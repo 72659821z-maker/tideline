@@ -18,7 +18,7 @@ export class Pedestrian {
     this.position = new THREE.Vector3(options.x ?? 0, 0, options.z ?? 0);
     this.heading = options.heading ?? 0;
     this.state = 'walk';
-    this.speed = random.float(1.1, 1.9);
+    this.speed = random.float(1.2, 2.0);
     this.timer = random.float(2, 8);
     this.health = 48;
     this.dead = false;

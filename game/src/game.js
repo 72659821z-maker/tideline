@@ -64,7 +64,7 @@ export class Game {
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.06;
+    this.renderer.toneMappingExposure = 1.1;
     this.camera = new THREE.PerspectiveCamera(64, window.innerWidth / window.innerHeight, 0.08, 1100);
     this.camera.position.set(20, 12, 90);
 

@@ -93,7 +93,7 @@ export class Menus {
     this.deathScreen.hidden = true;
   }
 
-  toast(text, duration = 2600) {
+  toast(text, duration = 3000) {
     this.toastElement.textContent = text;
     this.toastElement.classList.add('show');
     clearTimeout(this.toastTimer);

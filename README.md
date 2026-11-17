@@ -42,6 +42,29 @@ objective and follow the gold waypoint on the minimap.
 | `H` | — | Horn |
 | `Esc` | Pause and save | Pause and save |
 
+## What you can do
+
+TIDELINE is a small, complete crime sandbox rather than a demo scene:
+
+- **Five jobs, in order** — *First Light* (steal a coral Sundown GT off Pier 9 and bring it home),
+  *The Ledger* (clear Pike's crew at Casa Sombra and lift the notebook), *Salt in the Wound*
+  (meet Detective Voss at the marina and break up the dock crew), *Undertow* (take back Tito's
+  tow truck and lose four stars) and *Last Light* (the lighthouse, and Deacon Pike himself).
+  Each has its own dialogue, waypoint, enemy wave, escape beat and cash reward.
+- **Seven vehicles** — Sundown GT, Marlin S4, Dune Hauler, Breeze Cab, Riptide XL, Gull Compact
+  and the Corsair P9 cruiser. Any parked car or traffic car can be carjacked; theft raises heat.
+- **A real police system** — one to five wanted stars from gunfire, assault, theft and
+  hit-and-run, cruisers that pathfind to you on the street graph, officers that deploy on foot,
+  and stars that decay once you break line of sight. Getting caught or killed costs $250.
+- **Living streets** — eighteen traffic cars that turn at junctions and yield, twenty-two
+  pedestrians who circle blocks and flee gunfire, and a golden-hour coast with palms, benches,
+  hydrants, signals, a pier, boats and a lighthouse.
+- **Controls** — `WASD` move, mouse to look, `Shift` sprint/handbrake, `Space` jump/brake,
+  `F` enter or exit a car, click to punch or shoot, `1`/`2` to switch, `Esc` to pause and save.
+
+Built for make.fun gta6-01: everything you see is generated at load time from the modules in
+`game/src/`, so the entry runs from a folder with no network access.
+
 ## What is in the game
 
 - **Marisol Bay** — a coherent sunlit grid city with painted roads and crossings, varied
@@ -71,6 +94,9 @@ objective and follow the gold waypoint on the minimap.
   respawn card, and a `localStorage` save of cash, ammo and story progress.
 - **Polish** — WebAudio synthesis for engine, exhaust, sirens, gunfire, punches and crashes;
   GPU particles for smoke, sparks, blood and muzzle flash; screen shake; hit reactions.
+- **Golden hour** — warm directional sun, soft amber ambient, a low horizon glow in the sky
+  shader, a shimmering painted sea and additive red/blue light bars with tarmac light pools on
+  every cruiser.
 
 ## Layout
 

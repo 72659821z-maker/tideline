@@ -29,7 +29,7 @@ export class AudioEngine {
     try {
       this.ctx = new AudioContextClass();
       this.master = this.ctx.createGain();
-      this.master.gain.value = 0.38;
+      this.master.gain.value = 0.42;
       this.master.connect(this.ctx.destination);
       this.noiseBuffer = this.createNoise(1.2);
 

@@ -231,7 +231,7 @@ export class Effects {
     this.tracerPositions[base + 3] = to.x;
     this.tracerPositions[base + 4] = to.y;
     this.tracerPositions[base + 5] = to.z;
-    this.tracerLife[index] = 0.09;
+    this.tracerLife[index] = 0.11;
     this.tracerGeometry.attributes.position.needsUpdate = true;
   }
 

@@ -90,7 +90,7 @@ export const PLAYER = {
 
 export const WANTED = {
   maxStars: 5,
-  decayDelay: 13,
+  decayDelay: 12,
   decayStep: 7,
   respawnCashLoss: 250,
 };

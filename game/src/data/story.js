@@ -39,7 +39,7 @@ export const MISSIONS = [
       ['rafa', 'And Pike is?'],
       ['ivy', 'The reason this city smells like sunscreen and bad decisions. Get some sleep. Tomorrow we take his ledger.'],
     ],
-    reward: 600,
+    reward: 650,
   },
   {
     id: 'the-ledger',

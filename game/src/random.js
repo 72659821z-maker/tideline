@@ -20,6 +20,17 @@ export function makeRandom(seed = 1) {
     int: (min, max) => Math.floor(min + next() * (max - min + 1)),
     pick: (items) => items[Math.floor(next() * items.length)],
     chance: (p) => next() < p,
+    /** Pick from parallel weight tables; used for traffic mix and palette spreads. */
+    weighted(items, weights) {
+      let total = 0;
+      for (const w of weights) total += w;
+      let roll = next() * total;
+      for (let i = 0; i < items.length; i += 1) {
+        roll -= weights[i];
+        if (roll <= 0) return items[i];
+      }
+      return items[items.length - 1];
+    },
     shuffled(items) {
       const copy = items.slice();
       for (let i = copy.length - 1; i > 0; i -= 1) {

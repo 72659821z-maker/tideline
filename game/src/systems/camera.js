@@ -28,7 +28,7 @@ export class ThirdPersonCamera {
   }
 
   handleMouse(dx, dy) {
-    const sens = this.aiming ? 0.0016 : 0.0022;
+    const sens = this.aiming ? 0.0014 : 0.0022;
     this.yaw -= dx * sens;
     this.pitch = clamp(this.pitch + dy * sens * 0.8, -0.18, 0.82);
     if (this.game.player?.currentVehicle) {

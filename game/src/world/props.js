@@ -1,6 +1,8 @@
 // Street furniture and coastal landmarks, all procedurally modelled: palms, lamps,
 // traffic lights, benches, beach umbrellas, the pier, marina boats and the lighthouse.
 // Everything here is decoration: props never add colliders the player can snag on.
+// Palms are placed in clumps of at least two so the boulevard reads as a promenade.
+const PALM_CLUSTER_MIN = 2;
 import { signTexture } from './textures.js';
 import { makeRandom } from '../random.js';
 

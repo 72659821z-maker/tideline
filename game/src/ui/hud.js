@@ -4,7 +4,7 @@
 import { PALETTE, formatCash, districtAt } from '../config.js';
 import { Minimap } from './minimap.js';
 
-const font = (size, weight = 600) => `${weight} ${size}px "Segoe UI", "Trebuchet MS", Arial, sans-serif`;
+const font = (size, weight = 650) => `${weight} ${size}px "Segoe UI", "Trebuchet MS", Arial, sans-serif`;
 const displayFont = (size) => `900 ${size}px Impact, "Arial Black", "Segoe UI", sans-serif`;
 
 function roundRect(ctx, x, y, w, h, r) {

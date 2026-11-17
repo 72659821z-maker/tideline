@@ -136,7 +136,7 @@ export class PoliceUnit {
 
     this.shootClock -= dt;
     if (stars >= 3 && distance < 38 && this.shootClock <= 0 && this.game.hasLineOfSight(this.vehicle.position.x, this.vehicle.position.z, player.position.x, player.position.z)) {
-      this.shootClock = 1.1 + Math.random() * 0.9;
+      this.shootClock = 1.0 + Math.random() * 0.9;
       this.game.combat.policeShoot(this.vehicle);
     }
 

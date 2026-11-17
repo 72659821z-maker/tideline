@@ -16,7 +16,7 @@ export class SaveSystem {
       if (!parsed || typeof parsed !== 'object') return null;
       const missionIndex = Number.isFinite(parsed.missionIndex) ? Math.max(0, Math.min(5, Math.floor(parsed.missionIndex))) : 0;
       const cash = Number.isFinite(parsed.cash) ? Math.max(0, Math.floor(parsed.cash)) : 0;
-      const ammo = Number.isFinite(parsed.ammo) ? Math.max(0, Math.min(999, Math.floor(parsed.ammo))) : 48;
+      const ammo = Number.isFinite(parsed.ammo) ? Math.max(0, Math.min(999, Math.floor(parsed.ammo))) : 36;
       this.data = { cash, missionIndex, ammo, savedAt: parsed.savedAt ?? null, storyComplete: Boolean(parsed.storyComplete) };
       this.hasSave = true;
       return this.data;

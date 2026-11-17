@@ -47,7 +47,7 @@ export function buildRoadNetwork(scene) {
     for (let s = 0; s < ROAD_Z.length - 1; s += 1) {
       const z1 = ROAD_Z[s] + 13;
       const z2 = ROAD_Z[s + 1] - 13;
-      for (let z = z1; z < z2; z += 7) {
+      for (let z = z1; z < z2; z += 6) {
         paintBox(white, x - LANE_OFFSET, z + 1.6, 0.16, 3.2, 0.04);
         paintBox(white, x + LANE_OFFSET, z + 1.6, 0.16, 3.2, 0.04);
       }
@@ -59,7 +59,7 @@ export function buildRoadNetwork(scene) {
     for (let s = 0; s < ROAD_X.length - 1; s += 1) {
       const x1 = ROAD_X[s] + 13;
       const x2 = ROAD_X[s + 1] - 13;
-      for (let x = x1; x < x2; x += 7) {
+      for (let x = x1; x < x2; x += 6) {
         paintBox(white, x + 1.6, z - LANE_OFFSET, 3.2, 0.16, 0.04);
         paintBox(white, x + 1.6, z + LANE_OFFSET, 3.2, 0.16, 0.04);
       }

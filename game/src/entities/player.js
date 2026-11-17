@@ -151,7 +151,7 @@ export class Player {
 
     // Slow recovery out of combat, as long as no one is actively shooting.
     if (this.game.elapsed - this.lastDamageAt > 12 && this.health < this.maxHealth) {
-      this.health = Math.min(this.maxHealth, this.health + dt * 3.2);
+      this.health = Math.min(this.maxHealth, this.health + dt * 3.6);
     }
   }
 

@@ -144,7 +144,7 @@ export function randomPersonPalette(random) {
 
 /** A small pose helper: called with the model and a walk phase. */
 export function animateWalk(model, phase, amount = 1) {
-  const swing = Math.sin(phase) * 0.7 * amount;
+  const swing = Math.sin(phase) * 0.75 * amount;
   model.leftLeg.rotation.x = swing;
   model.rightLeg.rotation.x = -swing;
   model.leftArm.rotation.x = -swing * 0.7;

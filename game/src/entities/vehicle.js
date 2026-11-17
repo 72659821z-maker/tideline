@@ -2,6 +2,7 @@
 // dimensions, engine, steering and grip. Local forward is -Z, so a yaw of 0 faces north.
 // The same class drives traffic, police cruisers and Rafa's car; `mode` says which.
 import { PLAYER } from '../config.js';
+import { glowTexture } from '../world/textures.js';
 
 export const VEHICLE_TYPES = {
   sundown: {
@@ -198,6 +199,7 @@ export function createVehicleMesh(typeName, colorChoice) {
   }
 
   const lightbarMats = [];
+  const lightSprites = [];
   if (typeName === 'corsair') {
     const blackMat = new THREE.MeshStandardMaterial({ color: 0x20272a, roughness: 0.55, metalness: 0.15 });
     // Black doors and hood over the white shell make the cruiser read instantly.
@@ -225,6 +227,25 @@ export function createVehicleMesh(typeName, colorChoice) {
       group.add(light);
       lightbarMats.push(lightMat);
     }
+    // Additive glow sprites make the bar read as a flashing light from far down the street,
+    // plus a soft pool of coloured light on the tarmac beside the cruiser.
+    const glow = glowTexture();
+    for (const [sx, color] of [[-0.47, 0xff3a2a], [0.47, 0x3a86ff]]) {
+      const halo = new THREE.Sprite(new THREE.SpriteMaterial({
+        map: glow, color, transparent: true, opacity: 0.9, depthWrite: false, blending: THREE.AdditiveBlending, fog: false,
+      }));
+      halo.position.set(sx * 1.35, 2.05, 0.04);
+      halo.scale.set(3.1, 3.1, 1);
+      group.add(halo);
+      lightSprites.push(halo);
+      const pool = new THREE.Sprite(new THREE.SpriteMaterial({
+        map: glow, color, transparent: true, opacity: 0.3, depthWrite: false, blending: THREE.AdditiveBlending, fog: false,
+      }));
+      pool.position.set(sx * 1.7, 0.14, 0.1);
+      pool.scale.set(5.4, 2.1, 1);
+      group.add(pool);
+      lightSprites.push(pool);
+    }
     const badge = part(0.4, 0.25, 0.05, new THREE.MeshStandardMaterial({ color: 0xd9b35c, metalness: 0.5, roughness: 0.4 }));
     badge.position.set(0, 1.2, -l / 2 - 0.02);
     group.add(badge);
@@ -234,6 +255,7 @@ export function createVehicleMesh(typeName, colorChoice) {
   }
 
   group.userData.lightbarMats = lightbarMats;
+  group.userData.lightSprites = lightSprites;
   group.userData.wheels = wheels;
   group.userData.type = typeName;
   return group;
@@ -400,6 +422,12 @@ export class Vehicle {
       const pulse = Math.sin(this.game.elapsed * 12) > 0;
       lightbar[0].emissiveIntensity = pulse ? 4 : 0.4;
       lightbar[1].emissiveIntensity = pulse ? 0.4 : 4;
+      const sprites = this.mesh.userData.lightSprites ?? [];
+      for (let i = 0; i < sprites.length; i += 1) {
+        const on = i < 2 ? pulse : !pulse;
+        sprites[i].material.opacity = (i < 2 ? 0.85 : 0.26) * (on ? 1 : 0.1);
+        sprites[i].visible = on;
+      }
     }
   }
 

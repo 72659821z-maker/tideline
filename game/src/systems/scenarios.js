@@ -1,6 +1,8 @@
 // Deterministic screenshot scenes. ?shot=cover|chase|mission|drive sets the camera, the
 // people, the cars and the HUD state, then freezes the world so the capture is repeatable.
 // Any change here should keep the seed-7 framing intact for the shipped screenshots.
+// Slight warm bias applied to staged shots so the captures match the golden-hour sky.
+const SHOT_EXPOSURE_BIAS = 0.02;
 import { MISSIONS } from '../data/story.js';
 import { Vehicle } from '../entities/vehicle.js';
 import { Enemy } from '../entities/enemy.js';

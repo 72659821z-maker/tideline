@@ -147,7 +147,7 @@ export class CombatSystem {
     game.effects.tracer(origin, new THREE.Vector3(target.x, target.y, target.z));
     if (distance < 20) game.audio.suppressedShot(); else game.audio.suppressedShot();
     game.scarePeds(enemy.position.x, enemy.position.z, 25);
-    const hitChance = enemy.isBoss ? 0.7 : distance > 28 ? 0.34 : 0.55;
+    const hitChance = enemy.isBoss ? 0.7 : distance > 28 ? 0.34 : 0.5;
     if (Math.random() < hitChance) {
       if (player.currentVehicle) {
         player.currentVehicle.damage(enemy.isBoss ? 18 : 10, 'gunfire');

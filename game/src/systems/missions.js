@@ -1,6 +1,8 @@
 // The job chain: start markers, stage conditions, enemy waves, escape beats, dialogue
 // cues, mission banners, cash rewards and autosaving story progress.
 // Mission data lives in data/story.js; this file only walks it.
+// How long a completed objective banner lingers before the HUD clears it.
+const OBJECTIVE_BANNER_SECONDS = 6;
 import { MISSIONS } from '../data/story.js';
 
 export class MissionSystem {

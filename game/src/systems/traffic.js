@@ -135,7 +135,7 @@ export class TrafficSystem {
         nodeIndex: nextIndex,
         targetX: roads.laneTarget(fromIndex, nextIndex).x,
         targetZ: roads.laneTarget(fromIndex, nextIndex).z,
-        cruise: 11,
+        cruise: 12,
         speed: 8,
       };
       car.syncMesh(0);
