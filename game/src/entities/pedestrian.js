@@ -1,5 +1,6 @@
 // Sidewalk life: pedestrians circle their blocks, chat, flinch at violence and run when
 // a gun goes off or a car comes at them. They can be pushed, shot and run down.
+// A pedestrian walking a block loop is cheap: four corner targets and a flee state.
 import { BLOCK_CENTRES_X, BLOCK_CENTRES_Z } from '../config.js';
 import { createCharacterModel, randomPersonPalette, animateWalk } from '../world/characters.js';
 

@@ -1,5 +1,7 @@
 // DOM menus around the canvas: title screen with the field manual and save status,
 // pause panel, and the respawn card after death or arrest. Kept separate from the HUD.
+// The HUD draws the in-world play state; these panels are pure DOM and only appear when the
+// simulation is paused or stopped.
 import { formatCash } from '../config.js';
 
 export class Menus {

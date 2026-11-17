@@ -1,5 +1,7 @@
 // All sound is generated at runtime with WebAudio: a synth engine note, sirens, gunshots,
 // punches, crashes, footsteps, mission chimes and the horn. No audio files are loaded.
+// The context stays suspended until a real click or keypress calls ensure(), which is what
+// browser autoplay rules require.
 export class AudioEngine {
   constructor() {
     this.ctx = null;

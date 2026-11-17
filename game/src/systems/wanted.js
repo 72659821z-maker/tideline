@@ -1,5 +1,6 @@
 // The heat: one to five stars from crime, patrol cruisers that respond, line-of-sight
 // decay when Rafa disappears, and the busted timer when an officer gets close.
+// Stars only ever climb through commit(); setStars() exists for staging and for missions.
 import { WANTED } from '../config.js';
 import { PoliceUnit } from '../entities/police.js';
 

@@ -1,5 +1,6 @@
 // Rafa Solano on foot and behind the wheel: movement relative to the camera, jump,
 // building collision, a walk cycle, weapon pose, damage and entering or leaving cars.
+// The player mesh is hidden while driving; the camera then follows the vehicle instead.
 import { PLAYER, clamp } from '../config.js';
 import { createCharacterModel, animateWalk, poseArmed, poseAim } from '../world/characters.js';
 

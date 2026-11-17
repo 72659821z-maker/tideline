@@ -1,6 +1,7 @@
 // The fixed geography and tuning shared by the world, the HUD and the mission data.
 // Marisol Bay is a five-by-five street grid on a south-facing coast: five north–south
 // avenues, five east–west streets, sixteen city blocks, a beach and an open ocean.
+// Change a number here and the whole city moves: nothing else hard-codes these coordinates.
 export const GAME_TITLE = 'TIDELINE';
 export const CITY_NAME = 'MARISOL BAY';
 export const STORY_TAGLINE = 'A Marisol Bay Story';

@@ -1,5 +1,6 @@
 // Boot: create Marisol Bay, load any save, and either open the title screen or stage a
 // deterministic screenshot scene for the shots named in shots.json.
+// Entry point only: it wires the DOM canvases to Game and never touches game state itself.
 import { Game } from './game.js';
 import { stageShot } from './systems/scenarios.js';
 

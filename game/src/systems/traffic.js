@@ -1,5 +1,6 @@
 // AI traffic follows the street graph, turns at intersections, keeps a lane and slows
 // for the car ahead. Any of these cars can be carjacked and becomes the player's machine.
+// Cars far from the player are silently recycled so the street never empties out.
 import { TRAFFIC } from '../config.js';
 import { VEHICLE_TYPES, Vehicle, vehicleColor } from '../entities/vehicle.js';
 

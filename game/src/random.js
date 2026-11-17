@@ -1,5 +1,6 @@
 // A tiny seeded generator. The city, traffic and pedestrians use it so a given seed always
 // gives the same streetscape and each staged screenshot is deterministic.
+// Every consumer keeps its own stream, so adding a call in one place does not shift another.
 export function mulberry32(seed) {
   let state = seed >>> 0;
   return function random() {

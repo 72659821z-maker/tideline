@@ -1,5 +1,6 @@
 // GPU particle effects and tracers, all generated at runtime: tire smoke, muzzle flashes,
 // impact sparks, blood, exhaust puffs and the bright lines of gunfire.
+// Three fixed pools are recycled ring-buffer style, so nothing is allocated per shot.
 import { glowTexture } from '../world/textures.js';
 
 const PARTICLE_VERTEX = `

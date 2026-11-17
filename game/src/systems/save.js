@@ -1,4 +1,5 @@
 // The in-world save: cash, story progress, ammo and a timestamp in localStorage.
+// Everything is clamped on the way back in, so a hand-edited or stale save cannot corrupt a run.
 import { SAVE_KEY } from '../config.js';
 
 export class SaveSystem {

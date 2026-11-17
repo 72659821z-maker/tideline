@@ -1,5 +1,6 @@
 // Armed people on foot: Pike's crew, the hired guns at the marina and police officers
 // who pour out of cruisers. They take cover in the open, close distance and shoot back.
+// The same class covers cops and gang members; only the palette and the numbers differ.
 import { createCharacterModel, animateWalk, poseArmed, poseAim } from '../world/characters.js';
 
 const GANG_PALETTE = {

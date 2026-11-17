@@ -1,5 +1,6 @@
 // The story of Marisol Bay in five jobs: who speaks, where to go, what to steal,
 // who gets in the way and what it pays. All names, places and dialogue are original.
+// Stages are data only; missions.js drives them, so adding a job needs no new code.
 import { GARAGE } from '../config.js';
 
 export const CHARACTERS = {

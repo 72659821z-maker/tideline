@@ -1,5 +1,6 @@
 // Vehicle models and the arcade driving model: seven distinct machines, each with its own
 // dimensions, engine, steering and grip. Local forward is -Z, so a yaw of 0 faces north.
+// The same class drives traffic, police cruisers and Rafa's car; `mode` says which.
 import { PLAYER } from '../config.js';
 
 export const VEHICLE_TYPES = {

@@ -1,5 +1,6 @@
 // Keyboard and mouse state. Edge-triggered presses are cleared once a frame so actions
 // such as entering a car or pausing never repeat while a key is held.
+// Input only records intent; the systems themselves decide what each key means.
 export class Input {
   constructor(canvas) {
     this.canvas = canvas;

@@ -1,5 +1,6 @@
 // The city itself: sixteen blocks of sun-bleached buildings, a park, a working garage,
 // a marina and a beach, with the AABB colliders the player, cars and bullets use.
+// Geometry is added once at boot; only the collider list is queried every frame.
 import { BLOCK_CENTRES_X, BLOCK_CENTRES_Z, PARK, GARAGE, MARINA, LIGHTHOUSE, BEACH_Z, WATER_Z,
   CITY_LIMIT_X, NORTH_LIMIT } from '../config.js';
 import { makeRandom } from '../random.js';

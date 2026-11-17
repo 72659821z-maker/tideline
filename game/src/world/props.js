@@ -1,5 +1,6 @@
 // Street furniture and coastal landmarks, all procedurally modelled: palms, lamps,
 // traffic lights, benches, beach umbrellas, the pier, marina boats and the lighthouse.
+// Everything here is decoration: props never add colliders the player can snag on.
 import { signTexture } from './textures.js';
 import { makeRandom } from '../random.js';
 

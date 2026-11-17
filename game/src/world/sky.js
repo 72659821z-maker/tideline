@@ -1,5 +1,6 @@
 // The atmosphere: a hand-painted shader sky, the sun, sea, surf, distant islands and the
 // haze that keeps Marisol Bay feeling hot and endless. Lighting is set here too.
+// The sun sprite and glow are painted onto a canvas so the game loads no image files.
 import { waterTexture } from './textures.js';
 
 const SUN_DIRECTION = new THREE.Vector3(0.48, 0.58, 0.58).normalize();

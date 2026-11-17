@@ -1,6 +1,7 @@
 // The street grid, its painted markings and the graph the traffic and police drive on.
 // Roads are built once at boot: an asphalt sheet, instanced lane paint, crossings and a
 // 5×5 node graph with BFS path finding and lane offset helpers.
+// The graph is the single source of truth for traffic, police and the minimap.
 import { ROAD_X, ROAD_Z, ROAD_HALF, LANE_OFFSET, CITY_LIMIT_X, NORTH_LIMIT } from '../config.js';
 import { asphaltTexture } from './textures.js';
 

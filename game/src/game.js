@@ -1,5 +1,6 @@
 // The living city loop: builds Marisol Bay, owns every system, and moves between the
 // title, play, pause and respawn screens. The single requestAnimationFrame lives here.
+// Systems are plain objects on `this`; the update order below is the simulation order.
 import {
   GAME_TITLE, PLAYER, PLAYER_SPAWN, clamp,
 } from './config.js';

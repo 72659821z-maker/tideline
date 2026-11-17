@@ -1,5 +1,7 @@
 // Hitscan combat for Rafa, Pike's crew and the police: fist swings, pistol shots,
 // tracers, muzzle flashes, blood, sparks and the heat each crime creates.
+// Every hit is resolved against the nearest target inside a narrow cone with clear line of
+// sight, so cover actually works.
 import { WEAPONS } from '../config.js';
 
 export class CombatSystem {

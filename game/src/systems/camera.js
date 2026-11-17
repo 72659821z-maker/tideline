@@ -1,5 +1,6 @@
 // A springy third-person camera with mouse orbit, aim zoom, car chase framing and
 // impact shake. It never cuts: it eases toward the target so the city stays readable.
+// Staged screenshots bypass the easing entirely through placeAt().
 import { clamp } from '../config.js';
 
 export class ThirdPersonCamera {

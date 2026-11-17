@@ -1,5 +1,6 @@
 // The heads-up display, painted with the 2D canvas: health, cash, wanted stars,
 // mission objective and distance, minimap, weapon/ammo, speedometer, subtitles, prompts.
+// It runs in the screenshot scenes too, so the shot mode flag is honoured throughout.
 import { PALETTE, formatCash, districtAt } from '../config.js';
 import { Minimap } from './minimap.js';
 

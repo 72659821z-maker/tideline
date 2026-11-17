@@ -1,5 +1,6 @@
 // North-up minimap: roads, blocks, park, surf, mission waypoint, police blips, gang
 // contacts and the player's heading. Drawn into the HUD canvas, so it needs no images.
+// Everything is clipped to a circle and mapped around the player, so the map never scrolls.
 import { ROAD_X, ROAD_Z, ROAD_HALF, WATER_Z, BEACH_Z, PARK, BLOCK_CENTRES_X, BLOCK_CENTRES_Z, PALETTE } from '../config.js';
 
 export class Minimap {

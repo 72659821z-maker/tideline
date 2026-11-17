@@ -1,5 +1,6 @@
 // Every surface texture is painted into a canvas at boot. No image files, no downloads:
 // sun-faded facades, asphalt, sidewalk pavers, park grass, beach sand and shop signs.
+// Each generator caches its texture, so 16 blocks of buildings cost a handful of canvases.
 import { makeRandom } from '../random.js';
 
 const textureCache = new Map();

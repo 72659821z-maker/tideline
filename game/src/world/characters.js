@@ -1,5 +1,6 @@
 // Low-poly people built from primitives, with hip and shoulder pivots the player,
 // pedestrians, gangsters and officers animate for walking, aiming and hit reactions.
+// One model serves everyone; a palette is all it takes to tell a cop from a civilian.
 const skinTones = [0x8f5a3a, 0xb97850, 0xd69a6a, 0x6e442e, 0xe0aa7c, 0x9d6c4a];
 
 function box(w, h, d, color, roughness = 0.85) {

@@ -1,5 +1,6 @@
 // Police cruisers spawn on the grid, pathfind to Rafa, call in on-foot officers and lay
 // down fire at three stars or more. They are the visible arm of the wanted system.
+// One unit owns its car and the officers it has dropped off, and clean-up retires both.
 import { Enemy } from './enemy.js';
 import { Vehicle } from './vehicle.js';
 

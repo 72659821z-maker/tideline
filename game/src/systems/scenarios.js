@@ -1,5 +1,6 @@
 // Deterministic screenshot scenes. ?shot=cover|chase|mission|drive sets the camera, the
 // people, the cars and the HUD state, then freezes the world so the capture is repeatable.
+// Any change here should keep the seed-7 framing intact for the shipped screenshots.
 import { MISSIONS } from '../data/story.js';
 import { Vehicle } from '../entities/vehicle.js';
 import { Enemy } from '../entities/enemy.js';
