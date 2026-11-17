@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TIDELINE — A Marisol Bay Story</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2308181e'/%3E%3Cpath d='M8 40h48M8 48h48' stroke='%2314a6a6' stroke-width='5'/%3E%3Ctext x='32' y='30' text-anchor='middle' font-family='Arial Black' font-size='28' fill='%23ffb84d'%3ET%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --sun: #ffb84d;
+    --coral: #ff5b45;
+    --teal: #14a6a6;
+    --ink: #08181e;
+    --cream: #fff4dc;
+    --muted: #a9c2c4;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #08181e; color: var(--cream);
+    font-family: "Segoe UI", "Trebuchet MS", Arial, sans-serif; user-select: none; }
+  #game, #hud { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+  #game { touch-action: none; cursor: crosshair; }
+  #hud { pointer-events: none; z-index: 2; }
+  #vignette { position: fixed; inset: 0; z-index: 3; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 48%, rgba(3, 10, 13, .36) 100%); }
+
+  .screen { position: fixed; inset: 0; z-index: 10; display: flex; align-items: stretch; justify-content: stretch; }
+  [hidden] { display: none !important; }
+  .menu-bg { position: absolute; inset: 0; background:
+      linear-gradient(90deg, rgba(4, 14, 18, .93) 0%, rgba(4, 14, 18, .72) 42%, rgba(4, 14, 18, .2) 72%, rgba(4, 14, 18, .45) 100%),
+      linear-gradient(0deg, rgba(4, 14, 18, .9) 0%, transparent 42%),
+      radial-gradient(ellipse at 76% 42%, rgba(255, 157, 79, .14), transparent 55%); }
+  .menu-bg::after { content: ""; position: absolute; inset: 0; opacity: .18;
+    background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.05) 3px 4px); }
+
+  #start-screen { flex-direction: column; justify-content: space-between; padding: 4vh 5vw 3.6vh; }
+  .start-top { display: flex; justify-content: space-between; align-items: flex-start; position: relative; z-index: 1; }
+  .brandline { font: 700 12px/1.2 "Segoe UI", Arial, sans-serif; letter-spacing: .36em; color: var(--sun); text-transform: uppercase; }
+  .brandline small { display: block; margin-top: 9px; color: #bcd4d5; letter-spacing: .22em; font-size: 10px; }
+  .stamp { border: 1px solid rgba(255,244,220,.28); padding: 7px 13px; font-size: 10px; letter-spacing: .24em;
+    color: #cfe3e3; text-transform: uppercase; border-radius: 2px; background: rgba(4,14,18,.32); }
+  .title-zone { position: relative; z-index: 1; margin-top: auto; margin-bottom: auto; max-width: 870px; }
+  .eyebrow { color: #ffd18b; letter-spacing: .4em; font-size: 11px; font-weight: 700; margin-bottom: 14px; text-transform: uppercase; }
+  h1 { margin: 0; font-family: Impact, "Arial Black", "Segoe UI", sans-serif; font-size: clamp(82px, 13.4vw, 190px);
+    line-height: .78; letter-spacing: -.035em; color: #fff7e7; text-transform: uppercase;
+    text-shadow: 0 7px 0 rgba(8,24,30,.28), 0 18px 45px rgba(0,0,0,.5); }
+  h1 em { font-style: normal; color: var(--sun); }
+  .title-rule { display: flex; align-items: center; gap: 16px; margin: 24px 0 0; }
+  .title-rule span { height: 2px; width: 84px; background: var(--coral); display: block; }
+  .title-rule p { margin: 0; font-size: 14px; letter-spacing: .17em; text-transform: uppercase; color: #e8f5ef; }
+  .tagline { color: #a9c3c4; max-width: 540px; font-size: 16px; line-height: 1.55; margin: 19px 0 0; }
+  .start-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; position: relative; z-index: 1; }
+  .actions { display: flex; flex-direction: column; gap: 10px; min-width: 250px; }
+  button { appearance: none; border: 0; cursor: pointer; font-family: inherit; }
+  .btn { background: var(--coral); color: #14090a; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+    padding: 15px 23px; font-size: 13px; text-align: left; display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 8px 22px rgba(0,0,0,.25); transition: transform .14s ease, background .14s ease; border-radius: 2px; }
+  .btn:hover { background: #ff7a63; transform: translateX(3px); }
+  .btn.alt { background: rgba(8,24,30,.7); color: #eaf6f2; border: 1px solid rgba(255,244,220,.25); font-size: 11px; padding: 12px 17px; }
+  .btn.alt:hover { background: rgba(20,166,166,.22); border-color: rgba(255,244,220,.55); }
+  .btn small { font-weight: 600; opacity: .55; letter-spacing: .05em; }
+  .save-note { font-size: 10px; color: #91aaab; letter-spacing: .12em; text-transform: uppercase; margin: 3px 0 0; }
+  .controls { display: grid; grid-template-columns: repeat(2, minmax(120px, 1fr)); gap: 8px 26px; padding: 18px 22px;
+    border: 1px solid rgba(255,244,220,.16); background: rgba(4,15,19,.52); backdrop-filter: blur(2px);
+    border-radius: 2px; min-width: 390px; }
+  .controls h3 { font-size: 10px; letter-spacing: .27em; color: var(--sun); text-transform: uppercase; margin: 0 0 3px; grid-column: 1 / -1; }
+  .control-row { display: flex; align-items: center; gap: 10px; color: #b9d0d0; font-size: 11px; letter-spacing: .04em; }
+  kbd { min-width: 28px; height: 22px; display: inline-flex; align-items: center; justify-content: center; padding: 0 6px;
+    border: 1px solid rgba(255,244,220,.32); border-bottom-width: 2px; border-radius: 3px; font: 700 10px/1 "Segoe UI", Arial;
+    color: #fff4dc; background: rgba(255,255,255,.06); }
+  .footer-line { position: relative; z-index: 1; display: flex; justify-content: space-between; margin-top: 22px;
+    color: #759294; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; }
+  .logo-mark { color: var(--sun); letter-spacing: .25em; }
+  #start-screen .bg-note { position: absolute; right: 5vw; top: 37%; z-index: 1; width: 252px; border-left: 2px solid var(--coral);
+    padding: 13px 16px 14px 16px; background: rgba(4,15,19,.62); backdrop-filter: blur(2px);
+    color: #d3e4e1; font-size: 11px; line-height: 1.7; letter-spacing: .07em; opacity: .92; }
+  #start-screen .bg-note strong { display: block; color: var(--sun); font-size: 10px; letter-spacing: .24em; margin-bottom: 7px; }
+
+  .overlay { align-items: center; justify-content: center; background: rgba(3, 11, 14, .7); backdrop-filter: blur(5px); }
+  .panel { width: min(540px, 90vw); border: 1px solid rgba(255,244,220,.2); background: rgba(6, 20, 25, .94);
+    padding: 34px 38px 30px; border-radius: 3px; box-shadow: 0 24px 80px rgba(0,0,0,.5); }
+  .panel .eyebrow { margin-bottom: 10px; }
+  .panel h2 { margin: 0 0 8px; font-family: Impact, "Arial Black", sans-serif; font-size: 54px; line-height: .9; letter-spacing: .01em; text-transform: uppercase; }
+  .panel p { color: #a9c2c4; font-size: 13px; line-height: 1.6; }
+  .panel .actions { margin-top: 24px; min-width: 0; }
+  .panel .btn { width: 100%; }
+  .panel .control-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 22px; margin: 18px 0 0; }
+  .panel .control-grid .control-row { font-size: 11px; }
+  #death-screen .panel h2 { color: var(--coral); }
+  #death-screen .stat-line { display: flex; justify-content: space-between; border-top: 1px solid rgba(255,255,255,.12); padding-top: 12px; margin-top: 16px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #d8e8e3; }
+  #toast { position: fixed; z-index: 20; left: 50%; bottom: 11%; transform: translateX(-50%); padding: 9px 18px;
+    background: rgba(7,22,27,.9); border: 1px solid rgba(255,184,77,.5); color: #ffe1a3; font-size: 11px; letter-spacing: .16em;
+    text-transform: uppercase; opacity: 0; transition: opacity .3s ease; pointer-events: none; }
+  #toast.show { opacity: 1; }
+  #status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  @media (max-width: 860px) {
+    .controls { display: none; }
+    #start-screen .bg-note { display: none; }
+  }
+</style>
+</head>
+<body>
+<canvas id="game" aria-label="TIDELINE: an open-world crime game set in Marisol Bay. Use WASD to move, mouse to look, F to enter a car."></canvas>
+<canvas id="hud" aria-hidden="true"></canvas>
+<div id="vignette"></div>
+
+<section id="start-screen" class="screen">
+  <div class="menu-bg"></div>
+  <div class="start-top">
+    <div class="brandline">Solano Pictures presents<small>An original open-world crime story</small></div>
+    <div class="stamp">Marisol Bay &nbsp;·&nbsp; 16:42 &nbsp;·&nbsp; 31°C</div>
+  </div>
+  <div class="title-zone">
+    <div class="eyebrow">The coast is never clean</div>
+    <h1>Tide<em>line</em></h1>
+    <div class="title-rule"><span></span><p>A Marisol Bay Story</p></div>
+    <p class="tagline">Rafa Solano came home for the sun. Now the marina wants its ledger back,
+      the cops want a name, and every palm on the boulevard is watching.</p>
+  </div>
+  <div id="bg-note" class="bg-note"><strong>Welcome to Marisol Bay</strong>
+    A sun-bleached coastal city of crooked marinas, neon motels and very expensive mistakes.
+    Steal what you need. Keep the heat down. Get your people out.</div>
+  <div class="start-bottom">
+    <div class="actions">
+      <button class="btn" id="btn-start">Start Game <small>Enter</small></button>
+      <button class="btn alt" id="btn-continue" hidden>Continue saved story <small>Load</small></button>
+      <button class="btn alt" id="btn-reset" hidden>New game (erase save)</button>
+      <p class="save-note" id="save-note">No save on this machine · progress saves at the garage</p>
+    </div>
+    <div class="controls">
+      <h3>Field manual</h3>
+      <div class="control-row"><kbd>W A S D</kbd> Move / drive</div>
+      <div class="control-row"><kbd>Mouse</kbd> Look / aim</div>
+      <div class="control-row"><kbd>Shift</kbd> Sprint / handbrake</div>
+      <div class="control-row"><kbd>Space</kbd> Jump / brake</div>
+      <div class="control-row"><kbd>F</kbd> Enter / exit vehicle</div>
+      <div class="control-row"><kbd>Click</kbd> Attack / fire</div>
+      <div class="control-row"><kbd>1 2</kbd> Fists / pistol</div>
+      <div class="control-row"><kbd>Esc</kbd> Pause &amp; save</div>
+    </div>
+  </div>
+  <div class="footer-line"><span class="logo-mark">MARISOL BAY</span><span>Original city · original story · no outside assets</span><span>© 2026 Solano Pictures</span></div>
+</section>
+
+<section id="pause-screen" class="screen overlay" hidden>
+  <div class="panel">
+    <div class="eyebrow">The sun waits for no one</div>
+    <h2>Paused</h2>
+    <p>Take a breath. Marisol Bay will still be here — and so will the people looking for you.</p>
+    <div class="control-grid">
+      <div class="control-row"><kbd>WASD</kbd> Move</div><div class="control-row"><kbd>Mouse</kbd> Orbit camera</div>
+      <div class="control-row"><kbd>Shift</kbd> Sprint / handbrake</div><div class="control-row"><kbd>Space</kbd> Jump / brake</div>
+      <div class="control-row"><kbd>F</kbd> Enter / exit car</div><div class="control-row"><kbd>Click</kbd> Fire</div>
+    </div>
+    <div class="actions">
+      <button class="btn" id="btn-resume">Resume <small>Esc</small></button>
+      <button class="btn alt" id="btn-save">Save progress</button>
+      <button class="btn alt" id="btn-abandon">Back to title</button>
+    </div>
+  </div>
+</section>
+
+<section id="death-screen" class="screen overlay" hidden>
+  <div class="panel">
+    <div class="eyebrow" id="death-kicker">The bay keeps its secrets</div>
+    <h2 id="death-title">Flatlined</h2>
+    <p id="death-copy">The sun came up without you. Rafa wakes up in a clinic on the east side, lighter in the wallet and heavier in debt.</p>
+    <div class="stat-line"><span>Medical bill</span><strong id="death-cost">$250</strong></div>
+    <div class="actions"><button class="btn" id="btn-respawn">Get back out there <small>Enter</small></button></div>
+  </div>
+</section>
+
+<div id="toast"></div>
+<p id="status" role="status" aria-live="polite"></p>
+<script src="./vendor/three.min.js"></script>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
